@@ -7,7 +7,7 @@ from utils.data_utils import check_extension, save_dataset
 def generate_tsp_data(dataset_size, tsp_size):
     return np.random.uniform(size=(dataset_size, tsp_size, 2)).tolist()
 
-
+qz=0
 def generate_vrp_data(dataset_size, vrp_size):
     CAPACITIES = {
         10: 20.,
@@ -105,8 +105,8 @@ if __name__ == "__main__":
                         help="Distributions to generate for problem, default 'all'.")
 
     parser.add_argument("--dataset_size", type=int, default=10000, help="Size of the dataset")
-    parser.add_argument('--graph_sizes', type=int, nargs='+', default=[20, 50, 100],
-                        help="Sizes of problem instances (default 20, 50, 100)")
+    parser.add_argument('--graph_sizes', type=int, nargs='+', default=[52, 280, 1748],
+                        help="Sizes of problem instances (default 52, 280, 1748)")
     parser.add_argument("-f", action='store_true', help="Set true to overwrite")
     parser.add_argument('--seed', type=int, default=1234, help="Random seed")
 
@@ -138,14 +138,16 @@ if __name__ == "__main__":
                 datadir = os.path.join(opts.data_dir, problem)
                 os.makedirs(datadir, exist_ok=True)
 
+                namex=['berlin','a','vm']
+                 
                 if opts.filename is None:
-                    filename = os.path.join(datadir, "{}{}{}_{}_seed{}.pkl".format(
+                    filename = os.path.join(datadir, "{}_{}{}_{}.pkl".format(
                         problem,
-                        "_{}".format(distribution) if distribution is not None else "",
-                        graph_size, opts.name, opts.seed))
+                        namex[qz],
+                        graph_size, opts.name))
                 else:
                     filename = check_extension(opts.filename)
-
+                qz+=1
                 assert opts.f or not os.path.isfile(check_extension(filename)), \
                     "File already exists! Try running with -f option to overwrite."
 
