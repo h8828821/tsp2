@@ -147,7 +147,7 @@ if __name__ == "__main__":
                         graph_size, opts.name))
                 else:
                     filename = check_extension(opts.filename)
-                qz+=1
+                
                 assert opts.f or not os.path.isfile(check_extension(filename)), \
                     "File already exists! Try running with -f option to overwrite."
 
@@ -165,5 +165,5 @@ if __name__ == "__main__":
                     assert False, "Unknown problem: {}".format(problem)
 
                 print(dataset[0])
-
+                qz+=1
                 save_dataset(dataset, filename)
